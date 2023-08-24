@@ -46,7 +46,73 @@ submitted.
 * Concise documentation to build, integrate and test the solution.  This should also 
 include any required external packages outside of what is outlined above.
 
+## Dependencies
+* Clang+LLVM Compiler Infrastructure (tested on 11+)
+* Lit Test Harnes
+* VSCode
+* CMake 3.4.3+
+
+On MacOS:
+```
+brew install llvm@11
+brew install lit
+```
+
+On Ubuntu:
+```
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh
+sudo pip3 install lit
+```
+
+On Windows:
+```
+Good luck...
+```
+
 ## Buiding the sample code
+
+Building+Testing on MacOS:
+
+```
+git clone https://github.com/tactcomplabs/hwt-Fall23.git
+cd hwt-Fall23/challenge1
+mkdir build
+cd build
+cmake -DCHALLENGE1_LLVM_INSTALL_DIR=/usr/local/opt/llvm@11 ../
+make -j
+lit ./test
+```
+
+Building+Testing on Ubuntu:
+
+```
+git clone https://github.com/tactcomplabs/hwt-Fall23.git
+cd hwt-Fall23/challenge1
+mkdir build
+cd build
+cmake -DCHALLENGE1_LLVM_INSTALL_DIR=/usr/lib/llvm-11/ ../
+make -j
+lit ./test
+```
+
+Running tests outside of the `lit` test harness is simple, but requires 
+a number of pertinent command line options.  The following example was 
+executed on MacOS where the `hwt-Fall23` directory was located in the 
+user's $HOME directory.  The command line options include:
+
+* `-cc1` : enable the Clang compiler
+* `-load ~hwt-Fall23/challenge1/build/lib/libChallenge1Lib.dylib` : load the 
+external plugin lirbary.  Note the file extension.  On Ubuntu, this will be `.so`, not 
+`.dylib`
+* `-plugin Challenge1` : enables the plugin
+* ` -plugin-arg-Challenge1 -help` : passes a SINGLE argument to the plugin
+* `~/hwt-Fall23/challenge1/test/CLI/PrintHelp.cpp` : path to the CXX file
+
+```
+/usr/local/opt/llvm@11/bin/clang++ -cc1 -load ~/hwt-Fall23/challenge1/build/lib/libChallenge1Lib.dylib -plugin Challenge1  -plugin-arg-Challenge1 -help ~/hwt-Fall23/challenge1/test/CLI/PrintHelp.cpp
+```
 
 ## Licensing
 
