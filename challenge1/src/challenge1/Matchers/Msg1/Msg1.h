@@ -25,24 +25,47 @@
 //---------------
 // meta headers
 //---------------
-#include "../Challenge1Lang.h"
-#include "../Challenge1Conf.h"
-#include "../Challenge1Msg.h"
+#include "../../Challenge1Lang.h"
+#include "../../Challenge1Conf.h"
+#include "../../Challenge1Msg.h"
 
 using namespace clang;
 using namespace ast_matchers;
 using namespace diag;
 
-class Msg2 : public Challenge1Lang{
+#ifndef _CHALLENGE1_MSG1_H_
+#define _CHALLENGE1_MSG1_H_
+
+DeclarationMatcher FunctionMatcher = functionDecl().bind("function-decl");
+
+class Msg1 : public Challenge1Lang{
 public:
-  Msg2(clang::ASTContext *Ctx,
+  Msg1(clang::ASTContext *Ctx,
        clang::ast_matchers::MatchFinder &Finder,
        Challenge1Conf &Conf, Challenge1Msg &Msg)
     : Challenge1Lang(Ctx,Finder,Conf,Msg){
+
+    // add the matchers
+    Finder.addMatcher(FunctionMatcher, this);
   }
 
+  void run(const clang::ast_matchers::MatchFinder::MatchResult &Result) override{
+
+    if (const auto *F =
+            Result.Nodes.getNodeAs<clang::FunctionDecl>("function-decl")) {
+      std::string DeclName = "== FunctionDecl = " +
+                             F->getNameInfo().getAsString() +
+                             " @ " +
+                             F->getBeginLoc().printToString(
+                               getASTContext()->getSourceManager());
+      Msg.PrintRawMsg(DeclName);
+    }
+  }
+
+  void onEndOfTranslationUnit() override{}
+
   void PrintLangHelp() override{
-    Msg.PrintRawMsg(" MSG2 OPTIONS");
+    Msg.PrintRawMsg(" MSG1 OPTIONS");
     Msg.PrintRawMsg("*+----------------------------------------------------------+*");
     Msg.PrintRawMsg(" NONE");
     Msg.PrintRawMsg("*+----------------------------------------------------------+*");
@@ -50,6 +73,8 @@ public:
 
 private:
 
-};  // Msg2
+};  // Msg1
+
+#endif
 
 // EOF

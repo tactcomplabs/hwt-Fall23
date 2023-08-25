@@ -28,7 +28,8 @@ add_subdirectory(Matchers)
 #------------------------------------------------------------------------
 include_directories(.)
 add_library(Challenge1Lib SHARED ${Challenge1_SOURCES}
-                                 $<TARGET_OBJECTS:MsgObjs>
+                                 $<TARGET_OBJECTS:Msg1Objs>
+                                 $<TARGET_OBJECTS:Msg2Objs>
            )
 
 target_compile_options(Challenge1Lib PRIVATE -fPIC)

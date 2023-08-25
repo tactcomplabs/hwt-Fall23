@@ -73,7 +73,7 @@ public:
         EnableHelp = true;
       }else if( Arg.startswith("-enable-msg1") ){
         EnableMsg1 = true;
-      }else if( Arg.startswith("-enabel-msg2") ){
+      }else if( Arg.startswith("-enable-msg2") ){
         EnableMsg2 = true;
       }else{
         Msg.PrintRawMsg("Unknown command line option");
