@@ -47,14 +47,14 @@ submitted.
 include any required external packages outside of what is outlined above.
 
 ## Dependencies
-* Clang+LLVM Compiler Infrastructure (tested on 11+)
+* Clang+LLVM Compiler Infrastructure (tested on 13+)
 * Lit Test Harnes
 * VSCode
 * CMake 3.4.3+
 
 On MacOS:
 ```
-brew install llvm@11
+brew install llvm@13
 brew install lit
 ```
 
@@ -80,7 +80,7 @@ git clone https://github.com/tactcomplabs/hwt-Fall23.git
 cd hwt-Fall23/challenge1
 mkdir build
 cd build
-cmake -DCHALLENGE1_LLVM_INSTALL_DIR=/usr/local/opt/llvm@11 ../
+cmake -DCHALLENGE1_LLVM_INSTALL_DIR=/usr/local/opt/llvm@13 ../
 make -j
 lit ./test
 ```
@@ -92,7 +92,7 @@ git clone https://github.com/tactcomplabs/hwt-Fall23.git
 cd hwt-Fall23/challenge1
 mkdir build
 cd build
-cmake -DCHALLENGE1_LLVM_INSTALL_DIR=/usr/lib/llvm-11/ ../
+cmake -DCHALLENGE1_LLVM_INSTALL_DIR=/usr/lib/llvm-13/ ../
 make -j
 lit ./test
 ```
@@ -111,7 +111,7 @@ external plugin lirbary.  Note the file extension.  On Ubuntu, this will be `.so
 * `~/hwt-Fall23/challenge1/test/CLI/PrintHelp.cpp` : path to the CXX file
 
 ```
-/usr/local/opt/llvm@11/bin/clang++ -cc1 -load ~/hwt-Fall23/challenge1/build/lib/libChallenge1Lib.dylib -plugin Challenge1  -plugin-arg-Challenge1 -help ~/hwt-Fall23/challenge1/test/CLI/PrintHelp.cpp
+/usr/local/opt/llvm@13/bin/clang++ -cc1 -load ~/hwt-Fall23/challenge1/build/lib/libChallenge1Lib.dylib -plugin Challenge1  -plugin-arg-Challenge1 -help ~/hwt-Fall23/challenge1/test/CLI/PrintHelp.cpp
 ```
 
 ## Licensing
