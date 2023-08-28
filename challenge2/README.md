@@ -48,7 +48,12 @@ The deliverables for this challenge include:
 * Concise documentation to build, integrate and test the solution.  This should also 
 include any required external packages outside of what is outlined above.
 
-## Buiding the sample code
+## Sample Statistics Output
+
+The statistics for each test is contained within one or more CSV files.  For 
+parallel runs, there exists one CSV rank per MPI rank.  As a result, some tests 
+require ingesting one CSV file.  Some tests require ingesting many CSV files 
+that make up the full data set.
 
 ## Licensing
 
