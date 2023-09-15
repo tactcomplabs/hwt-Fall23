@@ -57,7 +57,13 @@ public:
                              " @ " +
                              V->getBeginLoc().printToString(
                                getASTContext()->getSourceManager());
+
       Msg.PrintRawMsg(DeclName);
+
+      std::string VStr = V->getNameAsString();
+      if( VStr.find(EEStr) != std::string::npos ){
+        Msg.PrintRawMsg("=========================== YOU FOUND THE EGG ===========================");
+      }
     }
   }
 
@@ -71,6 +77,7 @@ public:
   }
 
 private:
+  const std::string EEStr = "HWT23";
 
 };  // Msg2
 
